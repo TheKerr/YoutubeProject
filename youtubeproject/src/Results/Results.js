@@ -1,17 +1,31 @@
 import React from 'react';
+import styles from './Results.css';
 
 function Results(props) {
 
-	const results = [0,1,2,3]//props.results;
+	const results = props.results;
+	const fnLoadVideo = props.loadFunction;
+	const getThumbnailURLFromResult = (result) => {
+		return result.snippet.thumbnails.default.url;
+	}
+	const getVideoID = (result => {
+		return result.id.videoId;
+	})
+	const getVideoTitle = (result => {
+		return result.snippet.title;
+	})
+	const getVideoDescription = (result => {
+		return result.snippet.description;
+	})
 
 	return (
-		<div>
-			{results.map((e) => {
-				<div className='result' key={e}>
-					<img className='thumbnail' src="" alt="thumbnail" />
-					<p className='result-title'>result-title</p>
+		<div class="results">
+			{results.length > 0 && results.map((e, index) => 
+				<div className='result' key={index} onClick={() => {fnLoadVideo(getVideoID(e), getVideoTitle(e), getVideoDescription(e))}}>
+					<img className='thumbnail' src={getThumbnailURLFromResult(e)} alt="thumbnail"/>
+					<p className='result-title'>{getVideoDescription(e)}</p>
 				</div>
-			})}
+			)}
 		</div>
 	)
 }

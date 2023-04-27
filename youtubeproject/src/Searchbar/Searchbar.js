@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styles from './Searchbar.css';
 
-function Searchbar() {
+function Searchbar(props) {
+
+	const fnSearch = props.searchFunction;
+	
+	const [searchText, setSearchText] = useState('');
+
+
 	return (
-		<div>
+		<div class="search-bar">
 			<label>Video Search</label>
-			<input type="text"/>
-			<button>Search</button>
+			<input type="text" value={searchText} onInput={(e) => { console.log(e.target.value); setSearchText(e.target.value);}}/>
+			<button onClick={() => fnSearch(searchText)}>Search</button>
 		</div>
 	)
 }
