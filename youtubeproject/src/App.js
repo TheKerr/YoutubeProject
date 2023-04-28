@@ -7,6 +7,8 @@ import axios from "axios";
 
 function App() {
 
+	const API_KEY = ''; //INSERT API KEY HERE
+
 	const [videoTitle, setVideoTitle] = useState('');
 	const [videoURL, setVideoURL] = useState('');
 	const [videoDesc, setVideoDesc] = useState('');
@@ -16,7 +18,6 @@ function App() {
 		//do the api call and set the state to the response
 		const requestURL = 'https://www.googleapis.com/youtube/v3/search'
 		const maxResults = 5;
-		const API_KEY = '';
 		axios.get(requestURL + "?id=7lCDEYXw3mM&key=" + API_KEY + "&part=snippet&q='" + searchText + "'&maxResults="+maxResults).then((response) => {
 			setSearchResults(response.data.items);
 		})
